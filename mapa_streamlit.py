@@ -155,7 +155,7 @@ def generar_html_tooltip(row, caracteres_mostrar=caracteres_mostrar, tamano_fuen
                         <b>Adiciones</b>: ${row['VALOR TOTAL ADICIONES $']:,.2f}  </br>
                         <b>Valor final</b>: ${row['VALOR FINAL']:,.2f} </br>
                         <b>Total cobrado</b>: ${row['TotalCobrado($)']:,.2f} </br>
-                        <b>Objeto</b>: {row['OBJETO'][:caracteres_mostrar]}...</br>
+                        <b>Sector</b>: {row['VEREDA Y/O SECTOR'][:caracteres_mostrar]}...</br>
                         <b>Observaciones</b>: {row['OBSERVACIONES'][:caracteres_mostrar]}...</br>
                     </div>
                         """
@@ -326,7 +326,8 @@ df['subcadenas'] = df['subcadenas'].str.replace(r'\s+([NSEW])', r'\1', regex=Tru
 df['subcadenas'] = df['subcadenas'].str.replace(r'([WE]).*$', r'\1', regex=True)
 
 # Separando la latitud y longitud en forma de cadena
-df[['lat_str', 'lon_str']] = df['subcadenas'].str.split(' ', expand=True)
+# df[['lat_str', 'lon_str']] = df['subcadenas'].str.split(' ', expand=True) #original
+df[['lat_str', 'lon_str']] = df['subcadenas'].str.split(' ', n=1, expand=True) # se le agrega n=1 para que solo haga una division y cargue dos columnas separadas.  Si se generan más, no las tiene en cuenta
 
 # Aplicando función para convertir a decimal
 df['Latitud_decimal'] = df['lat_str'].apply(dms_to_decimal)
@@ -578,8 +579,8 @@ elif tab == "🗺️ Mapa Sitio":
     
 
     # Normalizar población para ajustar el tamaño de los círculos
-    min_radius = 10
-    max_radius = 20 #120
+    min_radius = 4 #10
+    max_radius = 8 #120
 
     # Evitar división por cero
     max_total_cobrado = max(df_filtrado['TotalCobrado($)'].abs().max(), 1)
