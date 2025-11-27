@@ -85,7 +85,7 @@ paleta_colores_tipo_subtipo = {
     # 🟢 Convenio Solidario (verdes)
     ('Convenio Solidario', ''): "#ff0000",
     ('Convenio Solidario', 'Placa Huella'): "#ff0000",
-    ('Convenio Solidario', 'Escenario deportivos'): "#ff9999",
+    ('Convenio Solidario', 'Escenario deportivos'): "#1f6712", # original "#ff9999",
     ('Convenio Solidario', 'Espacio Publico'): '#ff9999',
 
     # 🔴 Interventoría (rojos)
