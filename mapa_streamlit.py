@@ -1,3 +1,4 @@
+error inducido
 import streamlit as st
 import geopandas as gpd #validar si se puede solo con folium
 
